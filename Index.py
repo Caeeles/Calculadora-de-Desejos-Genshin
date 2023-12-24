@@ -91,15 +91,20 @@ c89 = c88 + 0.126
 c90 = c89 + 0.265
 
 # Pergunte ao usuário qual variável exibir
-escolha = input("Qual numero de desejos?\n")
+# Estrutura de Repetição.
+resposta = True
+while resposta:
+    try:
+        escolha = input("Qual numero de desejos?\n")
+        escolha = int(escolha)
+        if 1 <= escolha <= 90:
+            variavel_escolhida = locals()[f'c{escolha}']
+            print(f"A chance de obter um T5 com {escolha} desejos é de: {variavel_escolhida:.2f}%")
+        else:
+            print("Escolha inválida!")
+    except ValueError:
+        print("Escolha inválida! Digite um número de 1 a 90.")
 
-# Exiba a taxa da variável escolhida
-try:
-    escolha = int(escolha)
-    if 1 <= escolha <= 90:
-        variavel_escolhida = locals()[f'c{escolha}']
-        print(f"A Chance de Obter um T5 com {escolha} desejos é de: {variavel_escolhida:.2f}%")
-    else:
-        print("Escolha inválida!")
-except ValueError:
-    print("Escolha inválida! Digite um número de 1 a 90.")
+    resposta = input("Deseja continuar? (s/n): ")
+    if resposta.lower() == 'n':
+        break
